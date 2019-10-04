@@ -3,11 +3,19 @@
 }
 
 
+h1 {
+  color: rgb(187, 88, 58);
+  font-family: 'Righteous', cursive;
+  font-size: 130px;
+  /* -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: #3D4645; */
+}
+
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  background-image: URL('https://png.pngtree.com/png-vector/20190226/ourlarge/pngtree-vector-background-seamless--retro-film-png-image_704930.jpg');
+  height: 275px;
+  padding: 1px;
+  /* opacity: 0.6 */
 }
 
 .App-title {
@@ -27,18 +35,25 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  background-color: #C5CC7C;
+  background-color: #E5E4B2;
   text-align: center;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .movie-item {
   display: flex;
   margin: 20px;
-  background-color: lightgoldenrodyellow;
+  background-color: #E9CCAA;
+  /* border: 1px solid	#3D4645; */
   border-radius: 5px;
   padding: 10px;
   width: 200px;
   font-size: 18px;
   flex-direction: column;
-  /* word-break: break-all; */
+  color: #3D4645;
+}
+
+.description {
+  font-size: 10px;
+  padding-top: 5px;
 }

@@ -26,6 +26,9 @@ class MovieList extends Component {
                     <div>
                     <img src={movie.poster}></img>
                     </div>
+                    {/* <div className="description">
+                    {movie.description}
+                        </div> */}
                 </div>
                 )
         })}
