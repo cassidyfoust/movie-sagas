@@ -6,12 +6,20 @@ const mapStateToProps = reduxState => ({
 });
 
 class MovieDetails extends Component {
+
     render() {
         return (
             <>
-                <div className="movie-details">
-            <p>Test</p>
-            {JSON.stringify(this.props.reduxState.selectedMovie)}
+            <div className="movie-details">
+                {this.props.reduxState.selectedMovie.map((movie, id) => {
+                    return (
+                        <>
+                            <div>
+                               <h5>Title:</h5>{movie.title}
+                            </div>
+                        </>
+                    )
+                })}
                 </div>
             </>
         )
