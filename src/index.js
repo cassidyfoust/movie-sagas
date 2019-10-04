@@ -23,7 +23,8 @@ const sagaMiddleware = createSagaMiddleware();
 // axios call to server to get movies
 function* fetchMovies(){
     try {
-        const response = yield axios.get('/');
+        const response = yield axios.get('/movies/');
+        console.log('response:', response)
         yield put({ type: 'SET_MOVIES', payload: response.data })
     } catch (error) {
         console.log('error while fetching movies:', error)
