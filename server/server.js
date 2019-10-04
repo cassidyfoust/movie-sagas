@@ -20,6 +20,18 @@ app.get('/movies/', (req, res) => {
         });
 });
 
+// route to get details for selected movie
+
+app.get('/movies/detail/:id', (req, res) => {
+    const queryText = 'SELECT * FROM movies WHERE id=$1;';
+    pool.query(queryText, [req.params.id])
+        .then((result) => { res.send(result.rows); })
+        .catch((err) => {
+            console.log('Error completing DETAILS movie query', err);
+            res.sendStatus(500);
+        });
+});
+
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {
     console.log('Listening on port: ', port);

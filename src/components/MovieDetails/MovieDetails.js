@@ -11,6 +11,7 @@ class MovieDetails extends Component {
             <>
                 <div className="movie-details">
             <p>Test</p>
+            {JSON.stringify(this.props.reduxState.selectedMovie)}
                 </div>
             </>
         )
