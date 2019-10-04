@@ -14,12 +14,19 @@ class MovieList extends Component {
     getMovies() {
         this.props.dispatch({ type: 'FETCH_MOVIES' });
     }
+
+    handleClick(id) {
+        console.log('clicked:', id)
+        this.props.history.push('/details')
+    }
+
+
     render() {
         return (
     <div className="movie-list">
         {this.props.reduxState.movies.map((movie) => {
             return (
-                <div className="movie-item">
+                <div key={movie.id} className="movie-item" onClick={() => this.handleClick(movie.id)}>
                     <div>
                     <h5>{movie.title}</h5>
                     </div>
