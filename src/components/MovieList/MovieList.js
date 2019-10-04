@@ -16,15 +16,19 @@ class MovieList extends Component {
     }
     render() {
         return (
-    <div>
-        {JSON.stringify(this.props.reduxState.movies)}
-        {/* {this.props.reduxState.movies.map((movie) => {
+    <div className="movie-list">
+        {this.props.reduxState.movies.map((movie) => {
             return (
-                <div>
-                 {movie.name}
+                <div className="movie-item">
+                    <div>
+                    <h5>{movie.title}</h5>
+                    </div>
+                    <div>
+                    <img src={movie.poster}></img>
+                    </div>
                 </div>
                 )
-        })} */}
+        })}
     </div>
         );
     }
