@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
-import AddIcon from '@material-ui/icons/Add';
-import Button from '@material-ui/core/Button';
 
 const mapStateToProps = reduxState => ({
     reduxState,
@@ -38,14 +36,18 @@ state = {
         this.props.history.push('/details')
     }
 
+    goBack = () => {
+        this.props.dispatch({ type: 'SELECT_MOVIE', payload: this.state.movieToUpdate.id })
+        this.props.history.push('/details')
+    }
+
     render() {
 
         return (
             <>
                 <div>
                     <div className="edit">
-                        <h3>Update</h3>
-                    <br></br>
+                        <h3>Update Movie:</h3>
                     <form onSubmit={this.updateMovie}>
                         <div>
                             <TextField
@@ -65,13 +67,10 @@ state = {
                                 margin="normal"
                                 variant="outlined"
                             /></div>
-                        <div>
-                            <br></br>
-                            <Button variant="outlined" color="default" size="small" type="submit" >
-                                Update Movie
-                        <AddIcon />
-                            </Button>
-                        </div>
+                                <button type="submit" className="generalBtn">
+                                Update
+                            </button>
+                                <button className="generalBtn" onClick={this.goBack}>Cancel</button>
                     </form>
                 </div>
                 </div>
