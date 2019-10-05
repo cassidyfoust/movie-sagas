@@ -28,6 +28,7 @@ state = {
         });
     }
 
+    // update onClick event
     updateMovie = event => {
         event.preventDefault();
         console.log('updated movie!');
@@ -36,6 +37,7 @@ state = {
         this.props.history.push('/details')
     }
 
+    // cancel button functionality
     goBack = () => {
         this.props.dispatch({ type: 'SELECT_MOVIE', payload: this.state.movieToUpdate.id })
         this.props.history.push('/details')

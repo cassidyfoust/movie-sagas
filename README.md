@@ -1,9 +1,9 @@
-# Project Name
+# Project Description
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+To spin up this project:
+npm install
+npm install @material-ui/core/
+npm run server
+npm run client
 
-## Description
-
-Your project description goes here. What problem did you solve? How did you solve it?
-
-Additional README details can be found [here](https://github.com/PrimeAcademy/github-finalization-assignment).
+A movie wiki that allows the user to view movie details and edit title and description. This project uses React, Redux, Redux Sagas,and SQL queries.
