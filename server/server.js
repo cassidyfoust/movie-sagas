@@ -22,8 +22,21 @@ app.get('/movies/', (req, res) => {
 
 // route to get details for selected movie
 
+app.get('/movies/genres/:id', (req, res) => {
+    const queryText = `SELECT "genres".name FROM "movies"
+    JOIN "movie_genre" ON "movies".id = "movie_genre".movie_id
+    JOIN "genres" ON "genres".id = "movie_genre".genre_id
+    WHERE "movies".id = $1;`
+    pool.query(queryText, [req.params.id])
+        .then((result) => { res.send(result.rows); })
+        .catch((err) => {
+            console.log('Error completing DETAILS movie query', err);
+            res.sendStatus(500);
+        });
+});
+
 app.get('/movies/detail/:id', (req, res) => {
-    const queryText = 'SELECT * FROM movies WHERE id=$1;';
+    const queryText = `SELECT * FROM "movies" where id=$1;`
     pool.query(queryText, [req.params.id])
         .then((result) => { res.send(result.rows); })
         .catch((err) => {

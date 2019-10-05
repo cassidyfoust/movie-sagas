@@ -86,7 +86,7 @@ h5 {
 .movie-details {
   display: flex;
   flex-wrap: wrap;
-  padding-top: 50px;
+  padding-top: 100px;
   justify-content: space-around;
   background-color: #E5E4B2;
   font-family: 'Open Sans', sans-serif;
@@ -99,10 +99,25 @@ h5 {
   flex-direction: column;
   text-align: left;
   padding-left: 20px;
+  padding-right: 20px;
+  width: 550px;
 }
 
 .flexwrap {
   display: flex;
-  padding: 20px;
-  margin: 50px;
+  padding: 30px;
+  color: #3D4645;
+}
+
+.genres {
+  display: flex;
+  background-color: #E9CCAA;
+  /* border: 1px solid	#3D4645; */
+  border-radius: 5px;
+  padding: 10px;
+  flex-direction: column;
+  color: #3D4645;
+  height: 250px;
+  font-size: 12px;
+  width: 100px;
 }

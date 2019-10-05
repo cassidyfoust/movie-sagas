@@ -35,8 +35,9 @@ function* fetchMovies(){
 // generator function to set selected movie
 function* selectMovie(action){
     try{
-        const response = yield axios.get(`/movies/detail/${action.payload}`);
-        yield put({type: 'IS_SELECTED_MOVIE', payload: response.data})
+        const response1 = yield axios.get(`/movies/detail/${action.payload}`);
+        const response2 = yield axios.get(`/movies/genres/${action.payload}`);
+        yield put({type: 'IS_SELECTED_MOVIE', payload: [response1.data, response2.data]})
     } catch (error) {
         console.log('error while setting selected movie:', error)
     }
@@ -55,8 +56,18 @@ const movies = (state = [], action) => {
 const selectedMovie = (state = [], action) => {
     switch (action.type) {
         case 'IS_SELECTED_MOVIE':
-            console.log('this is the payload:', action.payload)
-            return action.payload;
+            console.log('this is the selected movie payload:', action.payload)
+            return action.payload[0];
+        default:
+            return state;
+    }
+}
+
+const selectedMovieGenre = (state = [], action) => {
+    switch (action.type) {
+        case 'IS_SELECTED_MOVIE':
+            console.log('this is the selected genre payload:', action.payload)
+            return action.payload[1];
         default:
             return state;
     }
@@ -77,7 +88,8 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
-        selectedMovie
+        selectedMovie,
+        selectedMovieGenre
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

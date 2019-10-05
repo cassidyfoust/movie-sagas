@@ -17,7 +17,13 @@ CREATE TABLE "genres" (
 -- This table will need to be populated with some data as well (INSERTS)
 -- Recall that this Junction Table will just be a table of ids!
 
+CREATE TABLE "movie_genre" (
+"id" SERIAL PRIMARY KEY,
+"movie_id" INT REFERENCES "movies",
+"genre_id" INT REFERENCES "genres"
+);
 
+INSERT INTO "movie_genre" ("movie_id", "genre_id") VALUES (1,1), (1,11), (2,9), (2,10), (3,13), (3,1), (4,2), (5,1), (5,6), (6,8), (7,1), (8,1), (8,5), (9,2), (10,11), (10,7), (10,12), (11,7), (11,12), (11,1), (12,6), (13,5), (13,10), (14,2), (14,3);
 
 --------[ DATA! ]---------
 
