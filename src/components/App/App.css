@@ -117,7 +117,20 @@ h5 {
   padding: 10px;
   flex-direction: column;
   color: #3D4645;
-  height: 250px;
+  height: 150px;
   font-size: 12px;
   width: 100px;
+}
+
+.editBtn {
+  display: flex;
+  /* margin-left: 93%;
+  margin-right: 15px; */
+  margin-top: 85px;
+  background-color: #E9CCAA;
+  width: 54px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-family: 'Righteous', cursive;
+  color: #3D4645;
 }

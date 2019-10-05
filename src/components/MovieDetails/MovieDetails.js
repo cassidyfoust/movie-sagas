@@ -7,6 +7,10 @@ const mapStateToProps = reduxState => ({
 
 class MovieDetails extends Component {
 
+handlClick = () => {
+    console.log('clicked')
+}
+
     render() {
 
         return (
@@ -21,6 +25,7 @@ class MovieDetails extends Component {
                                 <br></br>
                             <div>{movie.description}</div>
                             </div>
+                            <div className="genres-and-edit">
                             <div className="genres">
                                         <b>Genres:</b>
                                     {this.props.reduxState.selectedMovieGenre.map((genre) => {
@@ -31,6 +36,10 @@ class MovieDetails extends Component {
                                             </>
                                         )
                                     })}
+                                    </div>
+                                    <div>
+                                    <button className="editBtn" onClick={this.handleClick}>Edit</button>
+                                </div>
                                 </div>
                             </div>
                         </>
