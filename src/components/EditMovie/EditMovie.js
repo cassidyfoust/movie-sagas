@@ -34,9 +34,8 @@ state = {
         event.preventDefault();
         console.log('updated movie!');
         this.props.dispatch({type: 'UPDATE_MOVIE', payload: this.state.movieToUpdate})
-        // this.props.dispatch({ type: 'UPDATE_PLANT', payload: this.state.plantToUpdate })
-        // this.props.getPlantById();
-        // alert('Update Successful');
+        this.props.dispatch({ type: 'SELECT_MOVIE', payload: this.state.movieToUpdate.id})
+        this.props.history.push('/details')
     }
 
     render() {
