@@ -11,7 +11,7 @@ app.use(express.static('build'));
 /** ---------- ROUTES ---------- **/
 
 app.get('/movies/', (req, res) => {
-    const queryText = 'SELECT * FROM movies;';
+    const queryText = 'SELECT * FROM movies ORDER BY title;';
     pool.query(queryText)
         .then((result) => { res.send(result.rows); })
         .catch((err) => {
@@ -49,18 +49,36 @@ app.get('/movies/detail/:id', (req, res) => {
 
 app.put('/', (req, res) => {
     const updatedMovie = req.body;
+    let queryText = ''
+    let queryValues = []
+    if (updatedMovie.title == ''){
+        queryText = `UPDATE movies
+        SET "description" = $1 WHERE id=$2;`;
+        queryValues = [
+            updatedMovie.description,
+            updatedMovie.id
+        ];
+    }
+    else if (updatedMovie.description == ''){
+        queryText = `UPDATE movies
+        SET "title" = $1 WHERE id=$2;`;
 
-    const queryText = `UPDATE movies
-  SET "title" = $1, 
-  "description" = $2,
-  WHERE id=$3;`;
+        queryValues = [
+            updatedMovie.title,
+            updatedMovie.id
+        ];
+    }
+    else {
+        queryText = `UPDATE movies
+    SET "title" = $1, "description" = $2 WHERE id=$3;`;
 
-    const queryValues = [
-        updatedMovie.title,
-        updatedMovie.description,
-        updatedMovie.id
-    ];
-
+        queryValues = [
+            updatedMovie.title,
+            updatedMovie.description,
+            updatedMovie.id
+        ];
+    }
+console.log(req.body)
     pool.query(queryText, queryValues)
         .then(() => { res.sendStatus(200); })
         .catch((err) => {
