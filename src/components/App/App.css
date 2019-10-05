@@ -7,8 +7,8 @@ h1 {
   color: rgb(187, 88, 58);
   font-family: 'Righteous', cursive;
   font-size: 130px;
-  /* -webkit-text-stroke-width: 1px;
-   -webkit-text-stroke-color: #3D4645; */
+  -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: #3D4645;
 }
 
 .App-header {
@@ -39,6 +39,7 @@ h1 {
   background-color: #E5E4B2;
   text-align: center;
   font-family: 'Open Sans', sans-serif;
+  
 }
 
 .movie-item {
@@ -85,10 +86,23 @@ h5 {
 .movie-details {
   display: flex;
   flex-wrap: wrap;
-  padding-top: 80px;
+  padding-top: 50px;
   justify-content: space-around;
   background-color: #E5E4B2;
-  text-align: center;
   font-family: 'Open Sans', sans-serif;
-  height: 1000px;
+  height: 500px;
+}
+
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.flexwrap {
+  display: flex;
+  padding: 20px;
+  margin: 50px;
 }

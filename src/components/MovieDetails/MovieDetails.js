@@ -13,10 +13,13 @@ class MovieDetails extends Component {
             <div className="movie-details">
                 {this.props.reduxState.selectedMovie.map((movie, id) => {
                     return (
-                        <>
-                            <div>
-                               <h5>Title:</h5>{movie.title}
+                        <><div className="flexwrap"><img src={movie.poster} height="250px"></img>
+                            <div className="info">
+                                <b>{movie.title}</b>
+                                <br></br>
+                            <div>{movie.description}</div>
                             </div>
+                        </div>
                         </>
                     )
                 })}
