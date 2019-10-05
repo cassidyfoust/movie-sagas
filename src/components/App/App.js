@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import MovieList from '../MovieList/MovieList.js'
 import MovieDetails from '../MovieDetails/MovieDetails.js'
+import EditMovie from '../EditMovie/EditMovie.js'
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 
 class App extends Component {
@@ -19,7 +20,7 @@ class App extends Component {
       </div>
         <Route exact path='/' component={MovieList} />
         <Route path='/details' component={MovieDetails}/>
-        {/* {({match}) =><MovieDetails match={match}/>} */}
+        <Route path='/edit' component={EditMovie}/>
       </Router>
     );
   }

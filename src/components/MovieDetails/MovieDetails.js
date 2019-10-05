@@ -7,8 +7,10 @@ const mapStateToProps = reduxState => ({
 
 class MovieDetails extends Component {
 
-handlClick = () => {
+
+handleClick = () => {
     console.log('clicked')
+    this.props.history.push('/edit/')
 }
 
     render() {

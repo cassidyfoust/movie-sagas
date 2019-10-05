@@ -45,6 +45,30 @@ app.get('/movies/detail/:id', (req, res) => {
         });
 });
 
+// route to update movie details
+
+app.put('/', (req, res) => {
+    const updatedMovie = req.body;
+
+    const queryText = `UPDATE movies
+  SET "title" = $1, 
+  "description" = $2,
+  WHERE id=$3;`;
+
+    const queryValues = [
+        updatedMovie.title,
+        updatedMovie.description,
+        updatedMovie.id
+    ];
+
+    pool.query(queryText, queryValues)
+        .then(() => { res.sendStatus(200); })
+        .catch((err) => {
+            console.log('Error completing UPDATE movies query', err);
+            res.sendStatus(500);
+        });
+});
+
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {
     console.log('Listening on port: ', port);
