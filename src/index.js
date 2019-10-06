@@ -15,6 +15,7 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMovies);
+    yield takeEvery('SEARCH_MOVIES', searchMovies);
     yield takeEvery('SELECT_MOVIE', selectMovie);
     yield takeEvery('UPDATE_MOVIE', updateMovie);
 }
@@ -22,10 +23,21 @@ function* rootSaga() {
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
+//search functionality
+function* searchMovies(action){
+    try {
+        const response = yield axios.get('/search?q='+action.payload);
+        console.log('response:', response)
+        yield put({ type: 'SET_MOVIES', payload: response.data })
+    } catch (error) {
+        console.log('error while fetching movies:', error)
+    }
+}
+
 // axios call to server to get movies
 function* fetchMovies(){
     try {
-        const response = yield axios.get('/movies/');
+        const response = yield axios.get('/movies');
         console.log('response:', response)
         yield put({ type: 'SET_MOVIES', payload: response.data })
     } catch (error) {

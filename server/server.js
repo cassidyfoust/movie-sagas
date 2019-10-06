@@ -11,13 +11,41 @@ app.use(express.static('build'));
 /** ---------- ROUTES ---------- **/
 
 app.get('/movies/', (req, res) => {
-    const queryText = 'SELECT * FROM movies ORDER BY title;';
-    pool.query(queryText)
-        .then((result) => { res.send(result.rows); })
-        .catch((err) => {
-            console.log('Error completing SELECT movie query', err);
-            res.sendStatus(500);
-        });
+        let queryText = 'SELECT * FROM movies ORDER BY title;';
+        pool.query(queryText)
+            .then((result) => { res.send(result.rows); })
+            .catch((err) => {
+                console.log('Error completing SELECT movie query', err);
+                res.sendStatus(500);
+            })
+});
+
+// search route
+
+app.get('/search', (req, res) => {
+    let searchTerm = `%${req.query.q}%`
+    if (req.query.q == undefined || req.query.q == "") {
+        let queryText = 'SELECT * FROM "movies" ORDER BY title;';
+        pool.query(queryText).then(result => {
+            // Sends back the results in an object
+            res.send(result.rows);
+        })
+            .catch(error => {
+                console.log('error getting treats', error);
+                res.sendStatus(500);
+            });
+    }
+    else {
+        let queryText = 'SELECT * FROM "movies" WHERE "title" LIKE $1 ORDER BY title;';
+        pool.query(queryText, [searchTerm]).then(result => {
+            // Sends back the results in an object
+            res.send(result.rows);
+        })
+            .catch(error => {
+                console.log('error getting movies', error);
+                res.sendStatus(500);
+            });
+    }
 });
 
 // route to get details for selected movie

@@ -13,7 +13,7 @@ class MovieList extends Component {
     }
 
     getMovies() {
-        this.props.dispatch({ type: 'FETCH_MOVIES' });
+        this.props.dispatch({ type: 'FETCH_MOVIES'});
     }
 
     handleClick(id) {

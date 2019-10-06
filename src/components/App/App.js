@@ -4,10 +4,33 @@ import MovieList from '../MovieList/MovieList.js'
 import MovieDetails from '../MovieDetails/MovieDetails.js'
 import EditMovie from '../EditMovie/EditMovie.js'
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
+import { connect } from 'react-redux';
+
+const mapStateToProps = reduxState => ({
+  reduxState,
+});
 
 class App extends Component {
+
+  state = {
+    searchQuery: ''
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      searchQuery: event.target.value,
+    });
+  }
+
+  goHome = () => {
+    this.props.dispatch({ type: 'FETCH_MOVIES' });
+  }
+
+  handleClick = () => {
+    this.props.dispatch({ type: 'SEARCH_MOVIES', payload: this.state.searchQuery })
+  }
+
   // Renders the entire app on the DOM
   render() {
     return (
@@ -17,7 +40,7 @@ class App extends Component {
             <div className="searchbar"> <TextField
               id="standard-with-placeholder"
               placeholder="Search by title"
-              // onChange={(event) => this.handleChange('title', event)}
+              onChange={(event) => this.handleChange(event)}
               margin="normal"
               inputProps={{
                 style: {
@@ -29,14 +52,14 @@ class App extends Component {
               }}
             />
             </div>
-            <button className="searchBtn">Search</button>
-            <div className="homeBtn">
+            <button className="searchBtn" onClick={(event) => this.handleClick()}>Search</button>
+            <div className="homeBtn" onClick={this.goHome}>
               <Link to="/" className="link">Home</Link>
             </div>
           <h1>Movies 2 Go</h1>
         </div>
       </div>
-        <Route exact path='/' component={MovieList} />
+        <Route exact path='/' component={MovieList}/>
         <Route path='/details/:id' component={MovieDetails}/>
         <Route path='/edit/:id' component={EditMovie}/>
       </Router>
@@ -44,4 +67,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(mapStateToProps)(App);
