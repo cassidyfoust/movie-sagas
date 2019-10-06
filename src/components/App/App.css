@@ -153,3 +153,28 @@ h5 {
   color: #3D4645;
   justify-content: center;
 }
+
+.searchbar {
+  margin-top: 0px;
+    display: flex;
+    float: left;
+    padding-left: 15px;
+    padding-right: 5px;
+}
+
+.searchBtn{
+  margin-top: 15px;
+  margin-left: 15px;
+    display: flex;
+    float: left;
+    padding-left: 5px;
+    padding-right: 5px;
+      display: flex;
+  background-color:  #E5E4B2;
+  width: 90px;
+  height: 45px;
+  border-radius: 5px;
+  font-size: 24px;
+  font-family: 'Righteous', cursive;
+    color: rgb(187, 88, 58);
+}

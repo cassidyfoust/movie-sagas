@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import TextField from '@material-ui/core/TextField';
 
 const mapStateToProps = reduxState => ({
     reduxState,
@@ -24,7 +25,8 @@ class MovieList extends Component {
 
     render() {
         return (
-    <div className="movie-list">
+            <>
+            <div className="movie-list">
         {this.props.reduxState.movies.map((movie) => {
             return (
                 <div key={movie.id} className="movie-item" onClick={() => this.handleClick(movie.id)}>
@@ -41,6 +43,7 @@ class MovieList extends Component {
                 )
         })}
     </div>
+    </>
         );
     }
 }
