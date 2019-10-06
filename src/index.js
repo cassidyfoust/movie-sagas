@@ -18,10 +18,22 @@ function* rootSaga() {
     yield takeEvery('SEARCH_MOVIES', searchMovies);
     yield takeEvery('SELECT_MOVIE', selectMovie);
     yield takeEvery('UPDATE_MOVIE', updateMovie);
+    yield takeEvery('GET_GENRES', getGenres);
 }
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
+
+// get all genres
+function* getGenres(){
+    try {
+        const response = yield axios.get('/genres');
+        console.log('response:', response)
+        yield put({ type: 'SET_ALL_GENRES', payload: response.data })
+    } catch (error) {
+        console.log('error while fetching genres:', error)
+    }
+}
 
 //search functionality
 function* searchMovies(action){
@@ -77,6 +89,15 @@ const movies = (state = [], action) => {
     }
 }
 
+const genres = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_GENRES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 const selectedMovie = (state = [], action) => {
     switch (action.type) {
         case 'IS_SELECTED_MOVIE':
@@ -106,10 +127,10 @@ const selectedMovieId = (state = 0, action) => {
     }
 }
 
-// Used to store the movie genres
-const genres = (state = [], action) => {
+// Used to store all movie genres
+const allGenres = (state = [], action) => {
     switch (action.type) {
-        case 'SET_GENRES':
+        case 'SET_ALL_GENRES':
             return action.payload;
         default:
             return state;
@@ -123,7 +144,8 @@ const storeInstance = createStore(
         genres,
         selectedMovie,
         selectedMovieGenre,
-        selectedMovieId
+        selectedMovieId,
+        allGenres
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

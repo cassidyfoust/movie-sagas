@@ -63,6 +63,17 @@ app.get('/movies/genres/:id', (req, res) => {
         });
 });
 
+//route to get all genres
+app.get('/genres', (req, res) => {
+    const queryText = `SELECT * from "genres";`
+    pool.query(queryText)
+        .then((result) => { res.send(result.rows); })
+        .catch((err) => {
+            console.log('Error completing genres query', err);
+            res.sendStatus(500);
+        });
+});
+
 app.get('/movies/detail/:id', (req, res) => {
     const queryText = `SELECT * FROM "movies" where id=$1;`
     pool.query(queryText, [req.params.id])
