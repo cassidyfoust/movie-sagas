@@ -8,10 +8,14 @@ const mapStateToProps = reduxState => ({
 
 class EditMovie extends Component {
 
+    componentDidMount() {
+        this.props.dispatch({ type: 'SELECT_MOVIE', payload: this.props.match.params.id});
+    }
+
 // local state stores updated movie information
 state = {
     movieToUpdate: {
-        id: this.props.reduxState.selectedMovieId,
+        id: this.props.match.params.id,
         title: '',
         description: ''
     }
@@ -40,7 +44,7 @@ state = {
     // cancel button functionality
     goBack = () => {
         this.props.dispatch({ type: 'SELECT_MOVIE', payload: this.state.movieToUpdate.id })
-        this.props.history.push('/details')
+        this.props.history.push(`/details/${this.state.movieToUpdate.id}`)
     }
 
     render() {
@@ -50,31 +54,49 @@ state = {
                 <div>
                     <div className="edit">
                         <h3>Update Movie:</h3>
-                    <form onSubmit={this.updateMovie}>
-                        <div>
-                            <TextField
-                                id="outlined-name"
-                                label="Title"
-                                value={this.state.movieToUpdate.title}
-                                onChange={(event) => this.handleChange('title', event)}
-                                margin="normal"
-                                variant="outlined"
-                            /></div>
-                        <div>
-                            <TextField
-                                id="outlined-name"
-                                label="Description"
-                                value={this.state.movieToUpdate.description}
-                                onChange={(event) => this.handleChange('description', event)}
-                                margin="normal"
-                                variant="outlined"
-                            /></div>
-                                <button type="submit" className="generalBtn">
-                                Update
-                            </button>
-                                <button className="generalBtn" onClick={this.goBack}>Cancel</button>
-                    </form>
-                </div>
+                        {this.props.reduxState.selectedMovie.map((movie) => {
+                            return (
+                                <>
+                            <form onSubmit={this.updateMovie}>
+                                <b>Title:</b>
+                                <div>
+                                    <TextField
+                                        id="standard-with-placeholder"
+                                        placeholder={movie.title}
+                                        onChange={(event) => this.handleChange('title', event)}
+                                        margin="normal"
+                                        variant="outlined"
+                                                inputProps={{
+                                                    style: {
+                                                        width: '500px',
+                                                        // padding: '0 14px',
+                                                    },
+                                                }}
+                                    /></div>
+                                <b>Description</b>
+                                <div>
+                                    <TextField
+                                        id="standard-textarea"
+                                        placeholder={movie.description}
+                                        onChange={(event) => this.handleChange('description', event)}
+                                        margin="normal"
+                                        variant="outlined"
+                                        multiline
+                                                inputProps={{
+                                                    style: {
+                                                        height: '350px',
+                                                        width: '500px',
+                                                        // padding: '0 14px',
+                                                    }, }}
+                                    /></div>
+                                        <button type="submit" className="generalBtn">
+                                        Update
+                                    </button>
+                                        <button className="generalBtn" onClick={this.goBack}>Cancel</button>
+                            </form>
+                            </>
+                            )})}
+                        </div>
                 </div>
             </>
             )

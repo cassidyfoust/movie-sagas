@@ -17,7 +17,7 @@ class MovieDetails extends Component {
 
 handleClick = () => {
     console.log('clicked')
-    this.props.history.push('/edit/')
+    this.props.history.push(`/edit/${this.props.match.params.id}`)
 }
 
     render() {
@@ -47,7 +47,7 @@ handleClick = () => {
                                     })}
                                     </div>
                                     <div>
-                                    <button className="editBtn" onClick={this.handleClick}>Edit</button>
+                                    <button className="editBtn" onClick={(event) => this.handleClick()}>Edit</button>
                                 </div>
                                 </div>
                             </div>
