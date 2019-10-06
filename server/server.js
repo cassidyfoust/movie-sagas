@@ -90,15 +90,15 @@ app.put('/', (req, res) => {
     const updatedMovie = req.body;
     let queryText = ''
     let queryValues = []
-    if (updatedMovie.title == ''){
+    if (updatedMovie.title == '' && updatedMovie.description !== ''){
         queryText = `UPDATE movies
-        SET "description" = $1 WHERE id=$2;`;
+        SET "description" = $1 WHERE id=$2`;
         queryValues = [
             updatedMovie.description,
-            updatedMovie.id
+            updatedMovie.id,
         ];
     }
-    else if (updatedMovie.description == ''){
+    else if (updatedMovie.description == '' && updatedMovie.title !== ''){
         queryText = `UPDATE movies
         SET "title" = $1 WHERE id=$2;`;
 
@@ -107,21 +107,37 @@ app.put('/', (req, res) => {
             updatedMovie.id
         ];
     }
-    else {
+    else if (updatedMovie.description!== '' && updatedMovie.title !==''){
         queryText = `UPDATE movies
-    SET "title" = $1, "description" = $2 WHERE id=$3;`;
-
+    SET "title" = $1, "description" = $2 WHERE id=$3;`
         queryValues = [
             updatedMovie.title,
             updatedMovie.description,
-            updatedMovie.id
+            updatedMovie.id,
         ];
     }
-console.log(req.body)
     pool.query(queryText, queryValues)
         .then(() => { res.sendStatus(200); })
         .catch((err) => {
             console.log('Error completing UPDATE movies query', err);
+            res.sendStatus(500);
+        });
+});
+
+// update genres in edit page
+
+app.post('/genre', (req, res) => {
+    const updatedMovie = req.body;
+    let queryText = ''
+    let queryValues = [updatedMovie.id,updatedMovie.genreId]
+    if (updatedMovie.genreId !== '') {
+        queryText = `INSERT INTO "movie_genre" ("movie_id", "genre_id") VALUES ($1, $2);`;
+    }
+    console.log(queryText, queryValues)
+    pool.query(queryText, queryValues)
+        .then(() => { res.sendStatus(200); })
+        .catch((err) => {
+            console.log('Error completing UPDATE movie genre query', err);
             res.sendStatus(500);
         });
 });

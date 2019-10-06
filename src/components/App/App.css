@@ -251,3 +251,15 @@ h5 {
 .select-padding {
   margin-top: 15px;
 }
+
+.addGenreBtn {
+  display: inline-block;
+  background-color: #E9CCAA;
+  margin: 15px;
+  width: 107px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-family: 'Righteous', cursive;
+  color: #3D4645;
+  justify-content: center;
+}

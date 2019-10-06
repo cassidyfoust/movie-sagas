@@ -19,6 +19,7 @@ function* rootSaga() {
     yield takeEvery('SELECT_MOVIE', selectMovie);
     yield takeEvery('UPDATE_MOVIE', updateMovie);
     yield takeEvery('GET_GENRES', getGenres);
+    yield takeEvery('UPDATE_GENRE', updateGenre)
 }
 
 // Create sagaMiddleware
@@ -62,6 +63,15 @@ function* fetchMovies(){
 function* updateMovie(action) {
     try {
         yield axios.put('/', action.payload);
+    } catch (error) {
+        console.log('Error while updating:', error);
+
+    }
+}
+
+function* updateGenre(action) {
+    try {
+        yield axios.post('/genre', action.payload);
     } catch (error) {
         console.log('Error while updating:', error);
 
