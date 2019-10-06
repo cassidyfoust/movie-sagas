@@ -7,6 +7,13 @@ const mapStateToProps = reduxState => ({
 
 class MovieDetails extends Component {
 
+    componentDidMount() {
+        this.getMovieById();
+    }
+
+    getMovieById = () => {
+        this.props.dispatch({ type: 'SELECT_MOVIE', payload: this.props.match.params.id });
+    }
 
 handleClick = () => {
     console.log('clicked')

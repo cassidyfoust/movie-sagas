@@ -34,7 +34,7 @@ state = {
         console.log('updated movie!');
         this.props.dispatch({type: 'UPDATE_MOVIE', payload: this.state.movieToUpdate})
         this.props.dispatch({ type: 'SELECT_MOVIE', payload: this.state.movieToUpdate.id})
-        this.props.history.push('/details')
+        this.props.history.push(`/details/${this.state.movieToUpdate.id}`)
     }
 
     // cancel button functionality
