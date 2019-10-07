@@ -7,7 +7,12 @@ const mapStateToProps = reduxState => ({
 
 class MovieDetails extends Component {
 
+
     componentDidMount() {
+        this.getMovieById();
+    }
+    
+    componentDidUpdate() {
         this.getMovieById();
     }
 
