@@ -143,6 +143,25 @@ app.post('/update', (req, res) => {
         });
 });
 
+// delete genres request
+
+app.delete('/delete/:deleteInfo', (req, res) => {
+    console.log(req.params.deleteInfo)
+    const updatedMovie = req.body;
+    let queryText1 = ''
+    let queryValues = req.params.deleteInfo.split('-')
+    if (updatedMovie.genreDeleteId !== '') {
+        queryText1 = 'DELETE from "movie_genre" where "movie_id" = $1 and "genre_id" = $2;';
+    }
+    console.log(queryText1, queryValues)
+    pool.query(queryText1, queryValues)
+        .then(() => { res.sendStatus(200); })
+        .catch((err) => {
+            console.log('Error completing DELETE movie genre query', err);
+            res.sendStatus(500);
+        });
+});
+
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {
     console.log('Listening on port: ', port);

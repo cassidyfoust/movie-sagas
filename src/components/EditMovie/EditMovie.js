@@ -20,7 +20,8 @@ state = {
         id: this.props.match.params.id,
         title: '',
         description: '',
-        genreId:''
+        genreId:'',
+        genreDeleteId: '',
     }
 }
 
@@ -37,7 +38,7 @@ state = {
 
     // adds updated movie genre to state
 
-    handleGenreChange = event => {
+    handleGenreAdd = event => {
         if (event.target.value === 'Adventure'){
         this.setState({
             movieToUpdate: {
@@ -153,9 +154,121 @@ state = {
         this.props.history.push(`/details/${this.state.movieToUpdate.id}`)
     }
 
+    handleGenreDelete = event => {
+        if (event.target.value === 'Adventure') {
+            this.setState({
+                movieToUpdate: {
+                    ...this.state.movieToUpdate,
+                    genreDeleteId: 1,
+                }
+            })
+        }
+        else if (event.target.value === 'Animated') {
+            this.setState({
+                movieToUpdate: {
+                    ...this.state.movieToUpdate,
+                    genreDeleteId: 2,
+                }
+            })
+        }
+        else if (event.target.value === 'Biographical') {
+            this.setState({
+                movieToUpdate: {
+                    ...this.state.movieToUpdate,
+                    genreDeleteId: 3,
+                }
+            })
+        }
+        else if (event.target.value === 'Comedy') {
+            this.setState({
+                movieToUpdate: {
+                    ...this.state.movieToUpdate,
+                    genreDeleteId: 4,
+                }
+            })
+        }
+        else if (event.target.value === 'Disaster') {
+            this.setState({
+                movieToUpdate: {
+                    ...this.state.movieToUpdate,
+                    genreDeleteId: 5,
+                }
+            })
+        }
+        else if (event.target.value === 'Drama') {
+            this.setState({
+                movieToUpdate: {
+                    ...this.state.movieToUpdate,
+                    genreDeleteId: 6,
+                }
+            })
+        }
+        else if (event.target.value === 'Epic') {
+            this.setState({
+                movieToUpdate: {
+                    ...this.state.movieToUpdate,
+                    genreDeleteId: 7,
+                }
+            })
+        }
+        else if (event.target.value === 'Fantasy') {
+            this.setState({
+                movieToUpdate: {
+                    ...this.state.movieToUpdate,
+                    genreDeleteId: 8,
+                }
+            })
+        }
+        else if (event.target.value === 'Musical') {
+            this.setState({
+                movieToUpdate: {
+                    ...this.state.movieToUpdate,
+                    genreDeleteId: 9,
+                }
+            })
+        }
+        else if (event.target.value === 'Romantic') {
+            this.setState({
+                movieToUpdate: {
+                    ...this.state.movieToUpdate,
+                    genreDeleteId: 10,
+                }
+            })
+        }
+        else if (event.target.value === 'Science Fiction') {
+            this.setState({
+                movieToUpdate: {
+                    ...this.state.movieToUpdate,
+                    genreDeleteId: 11,
+                }
+            })
+        }
+        else if (event.target.value === 'Space-Opera') {
+            this.setState({
+                movieToUpdate: {
+                    ...this.state.movieToUpdate,
+                    genreDeleteId: 12,
+                }
+            })
+        }
+        else if (event.target.value === 'Superhero') {
+            this.setState({
+                movieToUpdate: {
+                    ...this.state.movieToUpdate,
+                    genreDeleteId: 13,
+                }
+            })
+        }
+    };
+
     addGenre = event => {
         event.preventDefault();
         this.props.dispatch({ type: 'UPDATE_GENRE', payload: this.state.movieToUpdate })
+    }
+
+    deleteGenre = event => {
+        event.preventDefault();
+        this.props.dispatch({ type: 'DELETE_GENRE', payload: this.state.movieToUpdate })
     }
 
     // cancel button functionality
@@ -211,7 +324,7 @@ state = {
                                             <div className="genreUpdate"><b>Add Genre:</b>
                                                 <div><br></br></div>
                                                 <div className="select-wrapper">
-                                                    <select className="select-css" onChange={this.handleGenreChange}>
+                                                    <select className="select-css" onChange={this.handleGenreAdd}>
                                                         <option>
                                                             None
                                                         </option>
@@ -223,8 +336,22 @@ state = {
                                                     </select>
                                                     <button className="addGenreBtn" onClick={this.addGenre}>Add Genre</button>
                                                 </div>
-                                        
-                                        </div>
+                                                <b>Delete Genre:</b>
+                                                    <div><br></br></div>
+                                                    <div className="select-wrapper">
+                                                        <select className="select-css" onChange={this.handleGenreDelete}>
+                                                            <option>
+                                                                None
+                                                        </option>
+                                                        {this.props.reduxState.selectedMovieGenre.map(genre => (
+                                                                <option key={genre.id}>
+                                                                    {genre.name}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                        <button className="deleteGenreBtn" onClick={this.deleteGenre}>Delete Genre</button>
+                                                    </div>
+                                                </div>
                                         </div>
                                         <div className="editFooter">
                                         <button type="submit" className="generalBtn">

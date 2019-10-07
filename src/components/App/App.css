@@ -263,3 +263,15 @@ h5 {
   color: #3D4645;
   justify-content: center;
 }
+
+.deleteGenreBtn {
+  display: inline-block;
+  background-color: #E9CCAA;
+  margin: 15px;
+  width: 157px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-family: 'Righteous', cursive;
+  color: #3D4645;
+  justify-content: center;
+}

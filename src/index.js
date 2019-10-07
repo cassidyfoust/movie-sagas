@@ -19,7 +19,8 @@ function* rootSaga() {
     yield takeEvery('SELECT_MOVIE', selectMovie);
     yield takeEvery('UPDATE_MOVIE', updateMovie);
     yield takeEvery('GET_GENRES', getGenres);
-    yield takeEvery('UPDATE_GENRE', updateGenre)
+    yield takeEvery('UPDATE_GENRE', updateGenre);
+    yield takeEvery('DELETE_GENRE', deleteGenre)
 }
 
 // Create sagaMiddleware
@@ -72,6 +73,17 @@ function* updateMovie(action) {
 function* updateGenre(action) {
     try {
         yield axios.post('/update', action.payload);
+    } catch (error) {
+        console.log('Error while updating:', error);
+
+    }
+}
+
+function* deleteGenre(action) {
+    let deleteInfo = `${action.payload.id}-${action.payload.genreDeleteId}`
+    try {
+        yield axios.delete(`/delete/${deleteInfo}`);
+        console.log(deleteInfo)
     } catch (error) {
         console.log('Error while updating:', error);
 
