@@ -71,7 +71,7 @@ function* updateMovie(action) {
 
 function* updateGenre(action) {
     try {
-        yield axios.post('/genre', action.payload);
+        yield axios.post('/update', action.payload);
     } catch (error) {
         console.log('Error while updating:', error);
 

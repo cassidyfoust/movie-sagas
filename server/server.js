@@ -126,15 +126,16 @@ app.put('/', (req, res) => {
 
 // update genres in edit page
 
-app.post('/genre', (req, res) => {
+app.post('/update', (req, res) => {
+    console.log(req.body)
     const updatedMovie = req.body;
-    let queryText = ''
+    let queryText1 = ''
     let queryValues = [updatedMovie.id,updatedMovie.genreId]
     if (updatedMovie.genreId !== '') {
-        queryText = `INSERT INTO "movie_genre" ("movie_id", "genre_id") VALUES ($1, $2);`;
+        queryText1 = 'INSERT INTO "movie_genre" ("movie_id", "genre_id") VALUES ($1, $2);';
     }
-    console.log(queryText, queryValues)
-    pool.query(queryText, queryValues)
+    console.log(queryText1, queryValues)
+    pool.query(queryText1, queryValues)
         .then(() => { res.sendStatus(200); })
         .catch((err) => {
             console.log('Error completing UPDATE movie genre query', err);
